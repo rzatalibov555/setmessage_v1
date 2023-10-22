@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import { v4 as uuidv4 } from 'uuid'; // Import uuid
 
 const EventSourcing = () => {
     const [messages, setMessages] = useState([]);
@@ -20,11 +19,9 @@ const EventSourcing = () => {
     }
 
     const sendMessage = async () => {
-        const id = uuidv4(); // Generate a unique ID
-
         await axios.post('http://localhost:5000/new-messages', {
             message: value,
-            id: id, // Use the generated ID
+            id: Date.now()
         })
     }
 
@@ -32,17 +29,15 @@ const EventSourcing = () => {
         <div className="center">
             <div>
                 <div className="form">
-                    <input value={value} onChange={e => setValue(e.target.value)} type="text" />
-                    <button onClick={sendMessage}>Send</button>
+                    <input value={value} onChange={e => setValue(e.target.value)} type="text"/>
+                    <button onClick={sendMessage}>Отправить</button>
                 </div>
-                <div className="message">
-
-                    {messages.map((mess, index) => (
-                        <div className="message" key={`${mess.id}-${index}`}>
+                <div className="messages">
+                    {messages.map(mess =>
+                        <div className="message" key={mess.id}>
                             {mess.message}
                         </div>
-                    ))}
-
+                    )}
                 </div>
             </div>
         </div>

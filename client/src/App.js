@@ -1,7 +1,7 @@
 
 import './App.css';
-
-import EventSourcing from './EventSourcing';
+import LongPulling from "./LongPulling";
+import EventSourcing from "./EventSourcing";
 import React from 'react';
 
 function App() {
